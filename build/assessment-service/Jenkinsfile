@@ -27,7 +27,10 @@ node('build-slave') {
                      stage('Build Core Components') {
                         env.NODE_ENV = "build"
                         print "Environment will be : ${env.NODE_ENV}"
-                        sh 'mvn clean install -DskipTests=true -Pknowlg-core'
+                        cloud_store_group_id = params.CLOUD_STORE_GROUP_ID
+                        cloud_store_artifact_id = params.CLOUD_STORE_ARTIFACT_ID
+                        cloud_store_version = params.CLOUD_STORE_VERSION
+                        sh 'mvn clean install -DskipTests=true -Pknowlg-core -DCLOUD_STORE_GROUP_ID=' + cloud_store_group_id + ' -DCLOUD_STORE_ARTIFACT_ID=' + cloud_store_artifact_id + ' -DCLOUD_STORE_VERSION=' + cloud_store_version
                      }
                  }
                 }
